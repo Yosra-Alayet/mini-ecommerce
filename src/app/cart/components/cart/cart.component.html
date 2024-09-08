@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-5 order-details">
+    <div class="section-title text-center">
+      <h3 class="title">Your Cart</h3>
+    </div>
+    <div class="order-summary">
+
+      <div *ngIf="cartItems.length > 0; else emptyCart">
+        <div *ngFor="let item of cartItems">
+          <div class="product-widget">
+            <div class="product-img">
+              <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+            </div>
+            <div class="product-body">
+              <p class="product-category">{{ item.category }}</p>
+              <h3 class="product-name"><a href="#">{{ item.title }}</a></h3>
+              <h4 class="product-price">{{ item.price | currency }}</h4>
+              <button pButton label="Remove" icon="pi pi-trash" (click)="removeItem(item)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-col">
+        <div><strong>TOTAL</strong></div>
+        <div><strong class="order-total">{{ getTotal() }}</strong></div>
+      </div>
+    </div>
+
+    <ng-template #emptyCart>
+      <p>Your cart is empty.</p>
+    </ng-template>
+  </div>
+</div>
